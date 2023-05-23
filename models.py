@@ -45,7 +45,7 @@ class Battery(Base):
 
     timestamp = Column(
         DateTime,
-        nullable=False,
+        primary_key=True,
         default=datetime.utcnow
     )
     volts = Column(
