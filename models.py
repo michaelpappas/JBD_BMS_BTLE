@@ -5,12 +5,14 @@ from datetime import datetime
 import os
 from dotenv import load_dotenv
 
+load_dotenv()
+
 # Configure the PostgreSQL connection
 db_user = ''
 db_password = os.environ['db_password']
 db_host = 'localhost'
 db_port = '5432'
-db_name = 'jbd_BMS'
+db_name = 'van_data'
 
 # Create the PostgreSQL connection URL
 db_url = f'postgresql://{db_user}:{db_password}@{db_host}:{db_port}/{db_name}'
