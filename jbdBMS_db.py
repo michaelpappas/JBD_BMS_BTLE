@@ -45,12 +45,10 @@ import atexit
 import paho.mqtt.client as paho
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-from models import Battery
+from models import Battery, db_url
 
 
-db_string = os.environ['DATABASE_URL']
-
-db = create_engine(db_string)
+db = create_engine(db_url)
 
 Session = sessionmaker(db)
 session = Session()
