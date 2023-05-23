@@ -8,9 +8,9 @@ from dotenv import load_dotenv
 load_dotenv()
 
 # Configure the PostgreSQL connection
-db_user = 'postgres'
-# db_password = os.environ['db_password']
-db_password = 'postgres'
+db_user = 'admin'
+db_password = os.environ['db_password']
+# db_password = 'postgres'
 db_host = 'localhost'
 db_port = '5432'
 db_name = 'van_data'
