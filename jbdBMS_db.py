@@ -7,15 +7,15 @@
 #   sudo python jbd-bms-mqtt.py -n "xiaoxiang BMS" -i 0 -t solar
 
 
-from bluepy.btle import Peripheral, DefaultDelegate, BTLEException
-from bluepy.btle import Scanner, DefaultDelegate
-import sys
-import struct
-import argparse
-# import json
-import time
-import binascii
-import atexit
+# from bluepy.btle import Peripheral, DefaultDelegate, BTLEException
+# from bluepy.btle import Scanner, DefaultDelegate
+# import sys
+# import struct
+# import argparse
+# # import json
+# import time
+# import binascii
+# import atexit
 # import paho.mqtt.client as paho
 from sqlalchemy import create_engine
 # from sqlalchemy.orm import sessionmaker

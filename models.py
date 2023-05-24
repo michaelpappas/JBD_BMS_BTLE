@@ -6,7 +6,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 # Configure the PostgreSQL connection
-db_user = 'admin'
+db_user = 'mpappas'
 db_password = os.environ['db_password']
 # db_password = 'postgres'
 db_host = 'localhost'
