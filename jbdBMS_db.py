@@ -4,7 +4,7 @@
 #
 # Run it as follows:
 #
-#   sudo python jbd-bms-mqtt.py -n "xiaoxiang BMS" -i 0 -t solar
+#   sudo python jbdBMS_db.py -n "xiaoxiang BMS" -i 0 -t solar
 
 
 # from bluepy.btle import Peripheral, DefaultDelegate, BTLEException
@@ -18,7 +18,7 @@
 # import atexit
 # import paho.mqtt.client as paho
 from sqlalchemy import create_engine
-# from sqlalchemy.orm import sessionmaker
+from sqlalchemy.orm import sessionmaker
 from models import Battery, db_url
 
 
