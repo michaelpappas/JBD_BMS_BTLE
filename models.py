@@ -1,5 +1,5 @@
 import datetime
-from sqlalchemy import create_engine, Column, DateTime, Float, Numeric, MetaData
+from sqlalchemy import create_engine, Column, DateTime, Float, Numeric
 from sqlalchemy.ext.declarative import declarative_base
 import os
 from dotenv import load_dotenv

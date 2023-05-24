@@ -18,7 +18,7 @@ import binascii
 import atexit
 # import paho.mqtt.client as paho
 from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker
+# from sqlalchemy.orm import sessionmaker
 from models import Battery, db_url
 
 
