@@ -24,61 +24,64 @@ Base = declarative_base()
 class Battery(Base):
     __tablename__ = 'battery'
 
-    timestamp = Column(DateTime, primary_key=True, default=datetime.datetime.utcnow)
+    timestamp = Column(
+                        DateTime,
+                        primary_key=True,
+                        default=datetime.datetime.utcnow)
     volts = Column(
-        Numeric,
-        nullable=False,
-        unique=False
+                    Numeric,
+                    nullable=False,
+                    unique=False
     )
     amps = Column(
-        Numeric,
-        nullable=False,
-        unique=False
+                    Numeric,
+                    nullable=False,
+                    unique=False
     )
     capacity = Column(
-        Numeric,
-        nullable=False,
-        unique=False
+                    Numeric,
+                    nullable=False,
+                    unique=False
     )
     remain = Column(
-        Numeric,
-        nullable=False,
-        unique=False
+                    Numeric,
+                    nullable=False,
+                    unique=False
     )
     percent = Column(
-        Numeric,
-        nullable=False,
-        unique=False
+                    Numeric,
+                    nullable=False,
+                    unique=False
     )
     temp1 = Column(
-        Numeric,
-        nullable=False,
-        unique=False
+                    Numeric,
+                    nullable=False,
+                    unique=False
     )
     temp2 = Column(
-        Numeric,
-        nullable=False,
-        unique=False
+                    Numeric,
+                    nullable=False,
+                    unique=False
     )
     cell1 = Column(
-        Float,
-        nullable=False,
-        unique=False
+                    Float,
+                    nullable=False,
+                    unique=False
     )
     cell2 = Column(
-        Float,
-        nullable=False,
-        unique=False
+                    Float,
+                    nullable=False,
+                    unique=False
     )
     cell3 = Column(
-        Float,
-        nullable=False,
-        unique=False
+                    Float,
+                    nullable=False,
+                    unique=False
     )
     cell4 = Column(
-        Float,
-        nullable=False,
-        unique=False
+                    Float,
+                    nullable=False,
+                    unique=False
     )
 
 # Create the table in the database
