@@ -2,3 +2,4 @@ SQLAlchemy
 psycopg2
 python-dotenv
 bluepy
+paho-mqtt
