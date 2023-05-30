@@ -4,19 +4,15 @@
 #
 # Run it as follows:
 #
-#   sudo python jbdBMS_db.py -n "xiaoxiang BMS" -i 0 -t solar
-
+#   sudo python jbdBMS_db.py -n "xiaoxiang BMS" -i 0
 
 from bluepy.btle import Peripheral, DefaultDelegate, BTLEException
 from bluepy.btle import Scanner, DefaultDelegate
 import sys
 import struct
 import argparse
-import json
 import time
 import binascii
-import atexit
-import paho.mqtt.client as paho
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from models import Battery, db_url
@@ -26,11 +22,6 @@ db = create_engine(db_url)
 
 Session = sessionmaker(db)
 session = Session()
-
-# def disconnect():
-#     mqtt.disconnect()
-#     print("broker disconnected")
-
 
 def cellinfo1(data):  # process battery info
     print("Processing (dd03) battery info 1...")
@@ -107,16 +98,12 @@ parser = argparse.ArgumentParser(description='Fetches and outputs JBD bms data')
 parser.add_argument("-n", "--name", help="BLE Device Name", required=False)
 parser.add_argument("-a", "--address", help="BLE Device Address", required=False)
 parser.add_argument("-i", "--interval", type=int, help="Read interval in minutes, 0=One & Done", required=True)
-parser.add_argument("-t", "--topic", help="MQTT Topic name", required=False)
 args = parser.parse_args()
 loopMinutes = args.interval * 60  # Takes the input value and turns it into minutes
-# topic = args.topic  # Topic to use when posting to MQTT
 bleName = args.name  # BLE device Name that will be scanned for to get address
 bleAddrP = args.address  # BLE address that will be used rather than a BLE name
 timeSleep = 1  # Used to slow things down a bit in case of timing issues
 ginfo = list()  # Global list to hold elements from the various requests
-# broker = "192.168.1.86"  # Change this to your MQTT broker address (MP set to localhost)
-# port = 1883  # Default port that MQTT is listening on
 
 # Resolve the BLE device address using a name or a provided address
 if not bleAddrP and not bleName:
@@ -162,9 +149,6 @@ while True:
     else:
         print('Connected...', bleAddr)
 
-    # atexit.register(disconnect)  # run the disconnect function when with the loop
-    # mqtt = paho.Client("control3")  # create and connect mqtt client
-    # mqtt.connect(broker, port)
     bms.setDelegate(MyDelegate())  # setup BlueTooth process delegate to get returned notifications
 
     # write x03 record to request battery info
@@ -180,54 +164,24 @@ while True:
     # to connect to the BMS via Bluetooth.
     bms.disconnect()
 
-    try:    # Do this try in case there is a short ginfo list count
-        # Load the JSON message with the merged BMS data and send it via MQTT
+    try:
+        # Parse the ginfo list to extract the battery data and add to db
         time.sleep(timeSleep)
-        gvolts = ginfo[0]
-        gamps = ginfo[1]
-        gcapacity = ginfo[2]
-        gremain = ginfo[3]
-        gpercent = ginfo[4]
-        gtemp1 = ginfo[5]
-        gtemp2 = ginfo[6]
-        gcellvolt1 = ginfo[7]
-        gcellvolt2 = ginfo[8]
-        gcellvolt3 = ginfo[9]
-        gcellvolt4 = ginfo[10]
-        message0 = {
-            # "topic": topic,
-            "volts": gvolts,
-            "amps": gamps,
-            "capacity": gcapacity,
-            "remain": gremain,
-            "percent": gpercent,
-            "temp1": gtemp1,
-            "temp2": gtemp2,
-            "cell1": gcellvolt1,
-            "cell2": gcellvolt2,
-            "cell3": gcellvolt3,
-            "cell4": gcellvolt4
-        }
-        # print("BMS json", message0)
-
-        new_battery = Battery(volts = gvolts,
-                              amps = gamps,
-                              capacity = gcapacity,
-                              remain = gremain,
-                              percent = gpercent,
-                              temp1 = gtemp1,
-                              temp2 = gtemp2,
-                              cell1 = gcellvolt1,
-                              cell2 = gcellvolt2,
-                              cell3 = gcellvolt3,
-                              cell4 = gcellvolt4,
+        new_battery = Battery(volts = ginfo[0],
+                              amps = ginfo[1],
+                              remain = ginfo[3],
+                              percent = ginfo[4],
+                              temp1 = ginfo[5],
+                              temp2 = ginfo[6],
+                              cell1 = ginfo[7],
+                              cell2 = ginfo[8],
+                              cell3 = ginfo[9],
+                              cell4 = ginfo[10],
                               )
         session.add(new_battery)
         session.commit()
 
-        # ret = mqtt.publish(topic, payload=json.dumps(message0), qos=0, retain=False)
     except Exception as e:
-        print("There is a short ginfo list, apparently a response message was missed")
         print("error- ", e)
 
     if loopMinutes != 0:  # Loop unless interval is 0, otherwise one & done
