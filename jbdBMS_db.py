@@ -12,7 +12,7 @@ from bluepy.btle import Scanner, DefaultDelegate
 import sys
 import struct
 import argparse
-# import json
+import json
 import time
 import binascii
 import atexit
