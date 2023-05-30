@@ -38,11 +38,6 @@ class Battery(Base):
                     nullable=False,
                     unique=False
     )
-    capacity = Column(
-                    Numeric,
-                    nullable=False,
-                    unique=False
-    )
     remain = Column(
                     Numeric,
                     nullable=False,
