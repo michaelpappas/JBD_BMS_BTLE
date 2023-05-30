@@ -1,4 +1,4 @@
-import datetime
+from datetime import datetime, timedelta
 from sqlalchemy import create_engine, Column, DateTime, Float, Numeric
 from sqlalchemy.ext.declarative import declarative_base
 import os
@@ -27,7 +27,7 @@ class Battery(Base):
     timestamp = Column(
                         DateTime,
                         primary_key=True,
-                        default=datetime.datetime.utcnow)
+                        default=datetime.datetime.utcnow - timedelta(hours=-7, minutes=0))
     volts = Column(
                     Numeric,
                     nullable=False,
