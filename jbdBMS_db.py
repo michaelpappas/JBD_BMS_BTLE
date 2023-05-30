@@ -195,7 +195,7 @@ while True:
         gcellvolt3 = ginfo[9]
         gcellvolt4 = ginfo[10]
         message0 = {
-            "topic": topic,
+            # "topic": topic,
             "volts": gvolts,
             "amps": gamps,
             "capacity": gcapacity,
