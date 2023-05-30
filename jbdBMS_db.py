@@ -115,7 +115,7 @@ elif bleName:
     # print("============ Scanning Results  ==============")
     for dev in devices:
         for (adtype, desc, value) in dev.getScanData():
-            print("Device = '%s'   Name = '%s'" % (dev.addr, value))
+            # print("Device = '%s'   Name = '%s'" % (dev.addr, value))
             if value == bleName:
                 # print("=========== Found It ==============")
                 # print("Name = %s" % value)
