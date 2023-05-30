@@ -115,8 +115,8 @@ bleName = args.name  # BLE device Name that will be scanned for to get address
 bleAddrP = args.address  # BLE address that will be used rather than a BLE name
 timeSleep = 1  # Used to slow things down a bit in case of timing issues
 ginfo = list()  # Global list to hold elements from the various requests
-# broker = "127.0.0.1"  # Change this to your MQTT broker address (MP set to localhost)
-# port = 1883  # Default port that MQTT is listening on
+broker = "192.168.1.86"  # Change this to your MQTT broker address (MP set to localhost)
+port = 1883  # Default port that MQTT is listening on
 
 # Resolve the BLE device address using a name or a provided address
 if not bleAddrP and not bleName:
