@@ -110,7 +110,7 @@ parser.add_argument("-i", "--interval", type=int, help="Read interval in minutes
 parser.add_argument("-t", "--topic", help="MQTT Topic name", required=False)
 args = parser.parse_args()
 loopMinutes = args.interval * 60  # Takes the input value and turns it into minutes
-# topic = args.topic  # Topic to use when posting to MQTT
+topic = args.topic  # Topic to use when posting to MQTT
 bleName = args.name  # BLE device Name that will be scanned for to get address
 bleAddrP = args.address  # BLE address that will be used rather than a BLE name
 timeSleep = 1  # Used to slow things down a bit in case of timing issues
@@ -208,7 +208,7 @@ while True:
             "cell3": gcellvolt3,
             "cell4": gcellvolt4
         }
-        print("BMS json", message0)
+        # print("BMS json", message0)
 
         new_battery = Battery(volts = gvolts,
                               amps = gamps,
@@ -225,9 +225,10 @@ while True:
         session.add(new_battery)
         session.commit()
 
-        # ret = mqtt.publish(topic, payload=json.dumps(message0), qos=0, retain=False)
-    except:
+        ret = mqtt.publish(topic, payload=json.dumps(message0), qos=0, retain=False)
+    except Exception as e:
         print("There is a short ginfo list, apparently a response message was missed")
+        print("error- ", e)
 
     if loopMinutes != 0:  # Loop unless interval is 0, otherwise one & done
         while len(ginfo) > 0:  # If looping the ginfo list needs to be cleaned or it just grows and grows
