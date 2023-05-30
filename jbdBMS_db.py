@@ -162,7 +162,7 @@ while True:
     else:
         print('Connected...', bleAddr)
 
-    atexit.register(disconnect)  # run the disconnect function when with the loop
+    # atexit.register(disconnect)  # run the disconnect function when with the loop
     # mqtt = paho.Client("control3")  # create and connect mqtt client
     # mqtt.connect(broker, port)
     bms.setDelegate(MyDelegate())  # setup BlueTooth process delegate to get returned notifications
