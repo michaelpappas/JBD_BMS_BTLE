@@ -117,6 +117,7 @@ class MyDelegate(DefaultDelegate):  # When the device replies this code is invok
     def handleNotification(self, cHandle, data):
         hex_data = binascii.hexlify(data)  # Given raw bytes, get an ASCII string representing the hex values
         text_string = hex_data.decode('utf-8')  # Check incoming data for routing to decoding routines
+        print("this is the text_string- ", text_string)
         if text_string.find('dd03') != -1:  # x03
             cellinfo1(data)  # Decode and process BMS info1
         elif text_string.find('77') != -1 and len(text_string) == 28 or len(text_string) == 36:  # x03
