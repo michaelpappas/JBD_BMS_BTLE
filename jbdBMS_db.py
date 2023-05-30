@@ -24,7 +24,7 @@ Session = sessionmaker(db)
 session = Session()
 
 def cellinfo1(data):  # process battery info
-    print("Processing (dd03) battery info 1...")
+    # print("Processing (dd03) battery info 1...")
     infodata = data
     print("Raw infodata1 ", infodata)
     # Unpack into variables, skipping header bytes 0-3
@@ -43,7 +43,7 @@ def cellinfo1(data):  # process battery info
 
 
 def cellinfo2(data):  # process battery info
-    print("Processing (dd03) battery info 2...")
+    # print("Processing (dd03) battery info 2...")
     infodata = data
     print("Raw infodata2 ", infodata)
     # Unpack into variables, no header as this is the 2nd part message
@@ -60,7 +60,7 @@ def cellinfo2(data):  # process battery info
 
 
 def cellvolts1(data):  # process cell voltages
-    print("Processing (dd04) cell volts message...")
+    # print("Processing (dd04) cell volts message...")
     celldata = data
     print("Raw celldata ", celldata)
     # Unpack into variables, skipping header bytes 0-3
@@ -109,19 +109,19 @@ ginfo = list()  # Global list to hold elements from the various requests
 if not bleAddrP and not bleName:
     sys.exit("Process needs either a ble Name or ble Address...Halting!")
 elif bleName:
-    print("Searching for ble Name = '%s'" % bleName)
+    # print("Searching for ble Name = '%s'" % bleName)
     scanner = Scanner()
     devices = scanner.scan(5)  # Scan for 5 seconds
-    print("============ Scanning Results  ==============")
+    # print("============ Scanning Results  ==============")
     for dev in devices:
         for (adtype, desc, value) in dev.getScanData():
             print("Device = '%s'   Name = '%s'" % (dev.addr, value))
             if value == bleName:
-                print("=========== Found It ==============")
-                print("Name = %s" % value)
-                print("Device = %s" % dev.addr)
-                print("RSSI = %d dB" % dev.rssi)
-                print("===================================")
+                # print("=========== Found It ==============")
+                # print("Name = %s" % value)
+                # print("Device = %s" % dev.addr)
+                # print("RSSI = %d dB" % dev.rssi)
+                # print("===================================")
                 bleAddr = dev.addr
 else:
     bleAddr = bleAddrP  # Use the command line parm address
@@ -135,14 +135,14 @@ except NameError:
 while True:
 
     try:  # Attempt a connection with the BMS via BLE
-        print('Attempting to connect...')
+        # print('Attempting to connect...')
         bms = Peripheral(bleAddr, addrType="public")
     except BTLEException as ex:
         time.sleep(30)  # timeSleep not used here, this waits 30 seconds between attempts
-        print('1st attempt failed, trying 2nd time to connect...')
+        # print('1st attempt failed, trying 2nd time to connect...')
         bms = Peripheral(bleAddr, addrType="public")
     except NameError:
-        sys.exit("Can not connect to the BLE device...Halting!")
+        # sys.exit("Can not connect to the BLE device...Halting!")
         # This means something went wrong as there is a ble address to use but it could not
         # be connected. Maybe some other application has the connection already and someone
         # forgot to disconnect when they were done configuring the BMS.
