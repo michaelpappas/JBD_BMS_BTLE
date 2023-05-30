@@ -142,7 +142,7 @@ while True:
         # print('1st attempt failed, trying 2nd time to connect...')
         bms = Peripheral(bleAddr, addrType="public")
     except NameError:
-        # sys.exit("Can not connect to the BLE device...Halting!")
+        sys.exit("Can not connect to the BLE device...Halting!")
         # This means something went wrong as there is a ble address to use but it could not
         # be connected. Maybe some other application has the connection already and someone
         # forgot to disconnect when they were done configuring the BMS.
