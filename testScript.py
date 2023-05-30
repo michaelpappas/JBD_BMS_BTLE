@@ -236,6 +236,7 @@ while True:
             "cell3": gcellvolt3,
             "cell4": gcellvolt4
         }
+        breakpoint()
         new_battery = Battery(volts = gvolts,
                               amps = gamps,
                               capactity = gcapacity,
