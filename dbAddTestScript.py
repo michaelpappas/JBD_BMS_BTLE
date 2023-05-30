@@ -12,7 +12,7 @@ def add_to_db():
     """ Add sample data to the battery db table."""
     new_battery = Battery(volts = 1234.5,
                               amps = 1234.5,
-                              capactity = 1234.5,
+                              capacity = 1234.5,
                               remain = 1234.5,
                               percent = 1234.5,
                               temp1 = 1234.5,
