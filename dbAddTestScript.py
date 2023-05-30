@@ -10,17 +10,17 @@ session = Session()
 
 def add_to_db():
     """ Add sample data to the battery db table."""
-    new_battery = Battery(volts = 1234.5,
-                              amps = 1234.5,
-                              capacity = 1234.5,
-                              remain = 1234.5,
-                              percent = 1234.5,
-                              temp1 = 1234.5,
-                              temp2 = 1234.5,
-                              cell1 = 1234.5,
-                              cell2 = 1234.5,
-                              cell3 = 1234.5,
-                              cell4 = 1234.5,
+    new_battery = Battery(volts = 13.24,
+                              amps = -1.08,
+                              capacity = 180.0,
+                              remain = 170.51,
+                              percent = 95,
+                              temp1 = 16.8,
+                              temp2 = 16.7,
+                              cell1 = 3320,
+                              cell2 = 3321,
+                              cell3 = 3317,
+                              cell4 = 3284,
                               )
     session.add(new_battery)
     session.commit()
