@@ -236,18 +236,18 @@ while True:
             "cell3": gcellvolt3,
             "cell4": gcellvolt4
         }
-        # new_battery = Battery(volts = gvolts,
-        #                       amps = gamps,
-        #                       capactity = gcapacity,
-        #                       remain = gremain,
-        #                       percent = gpercent,
-        #                       temp1 = gtemp1,
-        #                       temp2 = gtemp2,
-        #                       cell1 = gcellvolt1,
-        #                       cell2 = gcellvolt2,
-        #                       cell3 = gcellvolt3,
-        #                       cell4 = gcellvolt4,
-        #                       )
+        new_battery = Battery(volts = gvolts,
+                              amps = gamps,
+                              capactity = gcapacity,
+                              remain = gremain,
+                              percent = gpercent,
+                              temp1 = gtemp1,
+                              temp2 = gtemp2,
+                              cell1 = gcellvolt1,
+                              cell2 = gcellvolt2,
+                              cell3 = gcellvolt3,
+                              cell4 = gcellvolt4,
+                              )
         # session.add(new_battery)
         # session.commit()
         ret = mqtt.publish(topic, payload=json.dumps(message0), qos=0, retain=False)
