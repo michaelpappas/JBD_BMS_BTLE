@@ -27,9 +27,9 @@ db = create_engine(db_url)
 Session = sessionmaker(db)
 session = Session()
 
-def disconnect():
-    mqtt.disconnect()
-    print("broker disconnected")
+# def disconnect():
+#     mqtt.disconnect()
+#     print("broker disconnected")
 
 
 def cellinfo1(data):  # process battery info
@@ -110,13 +110,13 @@ parser.add_argument("-i", "--interval", type=int, help="Read interval in minutes
 parser.add_argument("-t", "--topic", help="MQTT Topic name", required=False)
 args = parser.parse_args()
 loopMinutes = args.interval * 60  # Takes the input value and turns it into minutes
-topic = args.topic  # Topic to use when posting to MQTT
+# topic = args.topic  # Topic to use when posting to MQTT
 bleName = args.name  # BLE device Name that will be scanned for to get address
 bleAddrP = args.address  # BLE address that will be used rather than a BLE name
 timeSleep = 1  # Used to slow things down a bit in case of timing issues
 ginfo = list()  # Global list to hold elements from the various requests
-broker = "192.168.1.86"  # Change this to your MQTT broker address (MP set to localhost)
-port = 1883  # Default port that MQTT is listening on
+# broker = "192.168.1.86"  # Change this to your MQTT broker address (MP set to localhost)
+# port = 1883  # Default port that MQTT is listening on
 
 # Resolve the BLE device address using a name or a provided address
 if not bleAddrP and not bleName:
@@ -163,8 +163,8 @@ while True:
         print('Connected...', bleAddr)
 
     atexit.register(disconnect)  # run the disconnect function when with the loop
-    mqtt = paho.Client("control3")  # create and connect mqtt client
-    mqtt.connect(broker, port)
+    # mqtt = paho.Client("control3")  # create and connect mqtt client
+    # mqtt.connect(broker, port)
     bms.setDelegate(MyDelegate())  # setup BlueTooth process delegate to get returned notifications
 
     # write x03 record to request battery info
@@ -225,7 +225,7 @@ while True:
         session.add(new_battery)
         session.commit()
 
-        ret = mqtt.publish(topic, payload=json.dumps(message0), qos=0, retain=False)
+        # ret = mqtt.publish(topic, payload=json.dumps(message0), qos=0, retain=False)
     except Exception as e:
         print("There is a short ginfo list, apparently a response message was missed")
         print("error- ", e)
