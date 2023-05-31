@@ -3,7 +3,7 @@ A Python script that pulls data from the JBD BMS commonly used for LiFePO4 batte
 
 
 ## Table of Contents
-- [Installaion](#installation)
+- [Installation](#installation)
 - [Project Structure](#project-structure)
 - [Further Improvements](#further-improvements)
 
@@ -21,7 +21,7 @@ To run the script you will need to create a CRONjon.
 
 Example CRONjob
 ```bash
-* * * * * sudo python3 [path_to_directory]/JBD_BMS_BTLE/jbdBMS_db.py -i 0 -n [bms bluetooth name]
+* * * * * sudo python3 [path_to_directory]/JBD_BMS_BTLE/jbdBMS_db.py -i 0 -n ["bms bluetooth name"(in quotes)]
 # this script will run every minute forever
 ```
 
