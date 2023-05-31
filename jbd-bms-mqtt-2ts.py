@@ -44,6 +44,18 @@ import binascii
 import atexit
 import paho.mqtt.client as paho
 
+### add db part
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
+from models import Battery, db_url
+
+
+db = create_engine(db_url)
+
+Session = sessionmaker(db)
+session = Session()
+### end db part
+
 
 def disconnect():
     mqtt.disconnect()
@@ -227,6 +239,21 @@ while True:
             "cell3": gcellvolt3,
             "cell4": gcellvolt4
         }
+        ##
+        new_battery = Battery(volts = ginfo[0],
+                              amps = ginfo[1],
+                              remain = ginfo[3],
+                              percent = ginfo[4],
+                              temp1 = ginfo[5],
+                              temp2 = ginfo[6],
+                              cell1 = ginfo[7],
+                              cell2 = ginfo[8],
+                              cell3 = ginfo[9],
+                              cell4 = ginfo[10],
+                              )
+        session.add(new_battery)
+        session.commit()
+        ##
         ret = mqtt.publish(topic, payload=json.dumps(message0), qos=0, retain=False)
     except:
         print("There is a short ginfo list, apparently a response message was missed")
