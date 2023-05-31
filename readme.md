@@ -3,7 +3,7 @@ A Python script that pulls data from the JBD BMS commonly used for LiFePO4 batte
 
 
 ## Table of Contents
-- [Installaion](#installation)
+- [Installation](#installation)
 - [Project Structure](#project-structure)
 - [Further Improvements](#further-improvements)
 
